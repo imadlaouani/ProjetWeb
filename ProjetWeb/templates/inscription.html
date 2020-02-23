@@ -1,0 +1,60 @@
+<h1>Se connecter</h1>
+
+{% block content %}
+<style>
+div {
+  border-radius: 50px;
+  padding: 20px;
+  border-color : blue;
+}
+formulaire{
+  justify-content:center;
+  display: flex;
+  width: 40%
+  margin: 20px 10px
+  border-radius : 50px;
+  border-color : black;
+  border-width : 20px;
+
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 0px 0px;
+  margin: 20px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+
+
+}
+
+input[type=password] {
+  width: 100%;
+  padding: 0px 0px;
+  margin: 20px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+
+}
+</style>
+
+<div class="page">
+  <div class = "formulaire">
+    <div class="blocCentrer">
+      <form method="post" action="" class="form-horizontal">
+      {% csrf_token %}
+      {% for field in form %}
+          <div class="form-group">
+          {{ field.label_tag }}<br>
+          {{ field }}
+          </div>
+      {% endfor %}
+      <div class="boutonForm">
+        <button class="btn btn-primary" type="submit">Connexion</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -7,11 +7,11 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Vendeur(models.Model):
-    numVendeur = models.AutoField(primary_key=True)
+    numVendeur = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE)
     nomVendeur = models.CharField(max_length=30)
     prenomVendeur = models.CharField(max_length=30)
     mailVendeur = models.EmailField()
-    noteVendeur = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    noteVendeur = models.IntegerField(blank=True,validators=[MinValueValidator(0), MaxValueValidator(5)])
     class Meta:
         db_table ='vendeur'
 
@@ -23,11 +23,12 @@ class Vendeur(models.Model):
 
 
 class Acheteur(models.Model):
-    numAcheteur = models.AutoField(primary_key=True)
+    
+    numAcheteur = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE)
     nomAcheteur = models.CharField(max_length=30)
     prenomAcheteur = models.CharField(max_length=30)
     mailAcheteur = models.EmailField()
-    noteAcheteur = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    noteAcheteur = models.IntegerField(blank = False,validators=[MinValueValidator(0), MaxValueValidator(5)])
     adresseAcheteur = models.TextField()
     
     
@@ -45,6 +46,9 @@ class Categorie(models.Model):
     )
     numCategorie = models.AutoField(primary_key=True)
     libelleCategorie = models.CharField(blank=True, max_length=30, choices=Categorie_choices)
+
+    class Meta:
+        db_table = 'categorie'
 
     def __str__(self):
         return self.libelleCategorie

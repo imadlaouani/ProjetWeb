@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from ProjetWeb import views
+
 
 urlpatterns = [
+    path('inscription/vendeur', views.inscription_vendeur),
     path('admin/', admin.site.urls),
+    path('',views.home, name='home'),
+    #path('incription/acheteur', views.inscription_acheteur, name='inscription')
+    #path('inscription/vendeur', views.inscription_vendeur,name='inscription')
+    
 ]
