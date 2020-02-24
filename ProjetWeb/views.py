@@ -7,6 +7,7 @@ from django.contrib.auth.models import User, Group
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage
 from .forms import *
+from django.contrib.auth.forms import AuthenticationForm
 
 def home(request):
     return render(request, 'home.html')
@@ -34,21 +35,3 @@ def inscription(request):
     return render(request, 'inscription.html', locals())
 
 
-
-def inscription_vendeur(request):
-    if request.method == 'POST':
-        form = VendeurForm(request.POST)
-        
-        if form.is_valid():
-            form.save() #Sauvegarde/Creation d'un utilisateur de base
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password) #Authentification de l'utilisateur
-          # On ajoute l'utilisateur au groupe étudiant ici (id groupe étudiant = 2 )
-            Vendeur = Vendeur(username = User.objects.get(username=username),nomVendeur=form.cleaned_data[last_name], prenomVendeur=form.cleaned_data[first_name],mailVendeur=form.cleaned_data.get('email'))
-            Vendeur.save()  # Sauvegarde de l'étudiant
-            login(request, user) #Connexion au site
-            return redirect('')
-    else:
-        form = VendeurForm(request.POST)
-    return render(request, 'inscription.html', {'form': form})
