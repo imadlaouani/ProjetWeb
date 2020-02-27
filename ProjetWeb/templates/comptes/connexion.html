@@ -7,7 +7,7 @@ Connexion
 {% block content %}
 
       <form class = "site-form"action = "/comptes/connexion/" method="post" >{% csrf_token %}
-      {{ form }}
+      {{ form.as_p }}
         <input type="submit" name="Connexion"> 
       </form>
       <a href="{% url 'comptes:inscription' %}">Vous n'êtes pas encore inscrits ?</a>

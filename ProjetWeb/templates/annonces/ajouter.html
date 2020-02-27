@@ -1,0 +1,14 @@
+{% block title %}
+Ajouter Annonce
+{% endblock %}
+
+
+
+{% block content %}
+
+      <form class = "site-form"action = "/annonces/ajouter/" method="post" >{% csrf_token %}
+      {{ form.as_p }}
+        <input type="submit" name="Ajouter"> 
+      </form>
+
+{% endblock %}

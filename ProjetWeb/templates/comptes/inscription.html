@@ -7,7 +7,7 @@ Inscription
 {% block content %}
 
       <form class = "site-form"action = "/comptes/inscription/" method="post" >{% csrf_token %}
-      {{ form }}
+      {{ form.as_p }}
         <input type="submit" name="Inscription"> 
       </form>
 
